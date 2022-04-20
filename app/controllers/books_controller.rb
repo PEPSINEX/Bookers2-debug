@@ -25,10 +25,21 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+
+    unless @book.user == current_user
+      flash[:notice] = '権限がありません'
+      redirect_to books_path
+    end
   end
 
   def update
     @book = Book.find(params[:id])
+
+    unless @book.user == current_user
+      flash[:notice] = '権限がありません'
+      redirect_to books_path
+    end
+
     @book.user = current_user
 
     if @book.update(book_params)
