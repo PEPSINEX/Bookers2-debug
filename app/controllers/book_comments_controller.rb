@@ -14,6 +14,14 @@ class BookCommentsController < ApplicationController
   end
 
   def destroy
+    book = Book.find(params[:book_id])
+    comment = BookComment.find(params[:id])
+    
+    if comment.destroy
+      redirect_to book_path(book), notice: "You have destroyed book_comment successfully."
+    else
+      redirect_to book_path(book), notice: "失敗時のメッセージ"
+    end
   end
 
   private

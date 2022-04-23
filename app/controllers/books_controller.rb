@@ -1,14 +1,14 @@
 class BooksController < ApplicationController
 
   def show
-    @book = Book.includes(:user,:favorite_users).find(params[:id])
-    @user = current_user
+    @book = Book.includes(:user, :favorite_users, :favorite_from_user_to_books).find(params[:id])
     @new_book = Book.new
     @book_comment = BookComment.new
+    @book_comments = BookComment.where(book_id: params[:id])
   end
 
   def index
-    @books = Book.includes(:favorite_from_user_to_books, :favorite_users)
+    @books = Book.includes(:favorite_users, :favorite_from_user_to_books)
     @book = Book.new
   end
 
