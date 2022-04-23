@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:index,:show,:edit,:update]
   resources :favorite_from_user_to_books, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
 end
