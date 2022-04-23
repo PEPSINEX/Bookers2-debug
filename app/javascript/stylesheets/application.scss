@@ -1,2 +1,6 @@
-@import "~bootstrap/scss/bootstrap"; 
+@import "~bootstrap/scss/bootstrap";
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.color-red { color: red; }
+.color-blue { color: blue; }
+.hover-text-decoration-none:hover { text-decoration: none; }

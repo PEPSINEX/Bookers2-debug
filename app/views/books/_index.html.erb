@@ -1,10 +1,11 @@
 <table class='table table-hover table-inverse'>
   <thead>
     <tr>
-      <th></th>
-      <th>Title</th>
-      <th>Opinion</th>
-      <th colspan="3"></th>
+      <th class="col-2"></th>
+      <th class="col-3">Title</th>
+      <th class="col-3">Opinion</th>
+      <th class="col-2"></th>
+      <th class="col-2"></th>
     </tr>
   </thead>
   <tbody>
@@ -18,12 +19,18 @@
         <td><%= book.body %></td>
         <td>
           <% if book.favorite_users.ids.include? current_user.id %>
-            <%= link_to favorite_from_user_to_book_path(book: book), method: :delete do %>
-              いいね解除
+            <%= link_to favorite_from_user_to_book_path(book: book), class: "hover-text-decoration-none", method: :delete do %>
+              <div class="color-red">
+                <i class="fas fa-heart"></i>
+                <%= book.favorite_users.count %>
+              </div>
             <% end %>
           <% else %>
-            <%= link_to favorite_from_user_to_books_path(book: book), method: :post do %>
-              いいね登録
+            <%= link_to favorite_from_user_to_books_path(book: book), class: "hover-text-decoration-none", method: :post do %>
+              <div class="color-blue">
+                <i class="fas fa-heart"></i>
+                <%= book.favorite_users.count %>
+              </div>
             <% end %>
           <% end %>
         </td>
