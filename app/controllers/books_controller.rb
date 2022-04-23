@@ -1,7 +1,7 @@
 class BooksController < ApplicationController
 
   def show
-    @book = Book.find(params[:id])
+    @book = Book.includes(:user,:favorite_users).find(params[:id])
     @user = current_user
     @new_book = Book.new
   end
