@@ -16,6 +16,19 @@ class User < ApplicationRecord
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50 }
 
+  scope :search, -> (method, word) {
+    case method
+    when :exact
+      where(name: word)
+    when :forward
+      where('name LIKE ?', "#{word}%")
+    when :backward
+      where('name LIKE ?', "%#{word}")
+    when :partial
+      where('name LIKE ?', "%#{word}%")
+    end
+  }
+
   def get_profile_image
     (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
