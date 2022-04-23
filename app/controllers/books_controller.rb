@@ -2,8 +2,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.includes(:user,:favorite_users).find(params[:id])
-    @user = current_user
     @new_book = Book.new
+    @book_comment = BookComment.new
   end
 
   def index
