@@ -1,0 +1,18 @@
+<!--リファクタリングする-->
+<% current_user_favorite_book = book.favorite_from_user_to_books.find { |favorite| favorite.user_id == current_user.id } %>
+
+<% if current_user_favorite_book %>
+  <%= link_to favorite_from_user_to_book_path(current_user_favorite_book), class: "hover-text-decoration-none", method: :delete do %>
+    <div class="color-red">
+      <i class="fas fa-heart"></i>
+      <%= book.favorite_users.count %>
+    </div>
+  <% end %>
+<% else %>
+  <%= link_to favorite_from_user_to_books_path(book: book), class: "hover-text-decoration-none", method: :post do %>
+    <div class="color-blue">
+      <i class="fas fa-heart"></i>
+      <%= book.favorite_users.count %>
+    </div>
+  <% end %>
+<% end %>

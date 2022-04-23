@@ -9,10 +9,7 @@ class FavoriteFromUserToBooksController < ApplicationController
   end
 
   def destroy
-    user = current_user
-    book = Book.find(params[:book])
-
-    favorite = FavoriteFromUserToBook.find_by(user: user, book: book)
+    favorite = FavoriteFromUserToBook.find(params[:id])
     favorite.destroy
     redirect_back(fallback_location: books_path)
   end
