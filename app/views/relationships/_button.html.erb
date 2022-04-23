@@ -1,0 +1,9 @@
+<% if current_user.following_user.include? user %>
+  <%= link_to relationship_path(Relationship.find_by(follower: current_user, followed: user)), method: :delete do %>
+    <button type="button" class="btn btn-warning">フォローを外す</button>
+  <% end %>
+<% else %>
+  <%= link_to relationships_path(user_id: user.id), method: :post do %>
+    <button type="button" class="btn btn-primary">フォローする</button>
+  <% end %>
+<% end %>
