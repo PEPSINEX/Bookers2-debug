@@ -2,25 +2,18 @@ class BookCommentsController < ApplicationController
   def create
     comment = BookComment.new(book_comment_params)
     book = Book.find(params[:book_id])
-
     comment.book = book
+    comment.save
 
-    if comment.save
-      redirect_to book_path(book), notice: "You have created book_comment successfully."
-    else
-      redirect_to book_path(book), notice: "失敗時のメッセージ"
-    end
+    @comments = book.book_comments
   end
 
   def destroy
     book = Book.find(params[:book_id])
     comment = BookComment.find(params[:id])
+    comment.destroy
 
-    if comment.destroy
-      redirect_to book_path(book), notice: "You have destroyed book_comment successfully."
-    else
-      redirect_to book_path(book), notice: "失敗時のメッセージ"
-    end
+    @comments = book.book_comments
   end
 
   private
