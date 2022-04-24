@@ -9,13 +9,13 @@ class Book < ApplicationRecord
 
   scope :search, -> (method, word) {
     case method
-    when :exact
+    when 'exact'
       where(['title LIKE(?) OR body LIKE(?)', word, word])
-    when :forward
+    when 'forward'
       where(['title LIKE(?) OR body LIKE(?)', "#{word}%", "#{word}%"])
-    when :backward
+    when 'backward'
       where(['title LIKE(?) OR body LIKE(?)', "%#{word}", "%#{word}"])
-    when :partial
+    when 'partial'
       where(['title LIKE(?) OR body LIKE(?)', "%#{word}%", "%#{word}%"])
     end
   }

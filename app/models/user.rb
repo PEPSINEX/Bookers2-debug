@@ -18,13 +18,13 @@ class User < ApplicationRecord
 
   scope :search, -> (method, word) {
     case method
-    when :exact
+    when 'exact'
       where(name: word)
-    when :forward
+    when 'forward'
       where('name LIKE ?', "#{word}%")
-    when :backward
+    when 'backward'
       where('name LIKE ?', "%#{word}")
-    when :partial
+    when 'partial'
       where('name LIKE ?', "%#{word}%")
     end
   }

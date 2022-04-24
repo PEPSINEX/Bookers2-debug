@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   end
   resources :favorite_from_user_to_books, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+
+  get '/search', to: 'searches#search'
 end
