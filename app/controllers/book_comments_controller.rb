@@ -3,7 +3,6 @@ class BookCommentsController < ApplicationController
     comment = BookComment.new(book_comment_params)
     book = Book.find(params[:book_id])
 
-    comment.user = current_user
     comment.book = book
 
     if comment.save
@@ -16,7 +15,7 @@ class BookCommentsController < ApplicationController
   def destroy
     book = Book.find(params[:book_id])
     comment = BookComment.find(params[:id])
-    
+
     if comment.destroy
       redirect_to book_path(book), notice: "You have destroyed book_comment successfully."
     else
@@ -27,6 +26,6 @@ class BookCommentsController < ApplicationController
   private
 
   def book_comment_params
-    params.require(:book_comment).permit(:comment)
+    params.require(:book_comment).permit(:comment).merge(user: current_user)
   end
 end

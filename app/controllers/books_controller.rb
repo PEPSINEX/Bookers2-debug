@@ -14,7 +14,6 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    @book.user = current_user
 
     if @book.save
       redirect_to book_path(@book), notice: "You have created book successfully."
@@ -41,8 +40,6 @@ class BooksController < ApplicationController
       redirect_to books_path
     end
 
-    @book.user = current_user
-
     if @book.update(book_params)
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
@@ -59,6 +56,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body).merge(user: current_user)
   end
 end
