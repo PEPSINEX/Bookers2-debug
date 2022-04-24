@@ -21,4 +21,7 @@ class Book < ApplicationRecord
       where(['title LIKE(?) OR body LIKE(?)', "%#{word}%", "%#{word}%"])
     end
   }
+
+  scope :created_desc, -> { order(created_at: :desc) }
+  scope :rating_desc, -> { order('book_ratings.rate DESC') }
 end

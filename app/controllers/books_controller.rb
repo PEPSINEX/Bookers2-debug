@@ -8,7 +8,13 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.includes(:favorite_users, :favorite_from_user_to_books, :book_rating)
+    if params[:created_desc]
+      @books = Book.includes(:favorite_users, :favorite_from_user_to_books, :book_rating).created_desc
+    elsif params[:rating_desc]
+      @books = Book.includes(:favorite_users, :favorite_from_user_to_books, :book_rating).rating_desc
+    else
+      @books = Book.includes(:favorite_users, :favorite_from_user_to_books, :book_rating)
+    end
     @book = Book.new
   end
 
