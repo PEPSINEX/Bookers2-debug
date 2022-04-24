@@ -12,6 +12,8 @@ class BooksController < ApplicationController
       @books = Book.includes(:favorite_users, :favorite_from_user_to_books, :book_rating).created_desc
     elsif params[:rating_desc]
       @books = Book.includes(:favorite_users, :favorite_from_user_to_books, :book_rating).rating_desc
+    elsif params[:category]
+      @books = Book.joins(:book_tag).category(params[:category])
     else
       @books = Book.includes(:favorite_users, :favorite_from_user_to_books, :book_rating)
     end
@@ -62,6 +64,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, book_rating_attributes: [:rate]).merge(user: current_user)
+    params.require(:book).permit(:title, :body, book_rating_attributes: [:rate], book_tag_attributes: [:name]).merge(user: current_user)
   end
 end

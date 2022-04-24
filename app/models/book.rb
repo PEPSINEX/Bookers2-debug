@@ -26,4 +26,5 @@ class Book < ApplicationRecord
 
   scope :created_desc, -> { order(created_at: :desc) }
   scope :rating_desc, -> { order('book_ratings.rate DESC') }
+  scope :category, -> name { where("book_tags.name like ?", "%#{name}%") }
 end

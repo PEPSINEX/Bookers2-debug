@@ -6,8 +6,9 @@
     <thead>
       <tr>
         <th class="col-2"></th>
-        <th class="col-2">Title</th>
+        <th class="col-1">Title</th>
         <th class="col-2">Opinion</th>
+        <th class="col-1">Category</th>
         <th class="col-2"></th>
         <th class="col-2"></th>
         <th class="col-2"></th>
@@ -22,6 +23,11 @@
           </td>
           <td><%= link_to book.title,book, class: "book_#{book.id}" %></td>
           <td><%= book.body %></td>
+          <td>
+            <%= link_to books_path(category: book.book_tag&.name) do %>
+              <%= book.book_tag&.name %>
+            <% end %>
+          </td>
           <td id="favorite_buttons_<%= book.id %>"><%= render 'books/favorite_button', book: book %></td>
           <td>コメント数: <%= book.book_comments.count %></td>
           <td>

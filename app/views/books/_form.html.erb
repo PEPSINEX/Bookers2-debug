@@ -29,6 +29,13 @@
         <%= i.label :star1, '★' %>
       <% end %>
     </div>
+
+    <div class="form-group">
+      <%= f.fields_for :book_tag, book.build_book_tag do |i| %>
+        <%= i.label :Category %>
+        <%= i.text_field :name %>
+      <% end %>
+    </div>
   <% end %>
 
   <div class="form-group">
