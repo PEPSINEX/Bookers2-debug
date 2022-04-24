@@ -23,6 +23,15 @@
           <% end %>
           <td id="favorite_buttons_<%= @book.id %>"><%= render 'books/favorite_button', book: @book %></td>
           <td>コメント数: <%= @book.book_comments.count %></td>
+          <td>
+            <div class="star">
+              <% if @book.book_rating.present? %>
+                <% for i in 1..@book.book_rating.rate do %>
+                  ★
+                <% end %>
+              <% end %>
+            </div>
+          </td>
         </tr>
       </table>
 

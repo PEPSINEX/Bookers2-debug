@@ -3,8 +3,8 @@ class Book < ApplicationRecord
   has_many :favorite_from_user_to_books, dependent: :destroy
   has_many :favorite_users, through: :favorite_from_user_to_books, source: :user
   has_many :book_comments, dependent: :destroy
-  has_many :book_ratings, dependent: :destroy
-  accepts_nested_attributes_for :book_ratings
+  has_one :book_rating, dependent: :destroy
+  accepts_nested_attributes_for :book_rating
 
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}

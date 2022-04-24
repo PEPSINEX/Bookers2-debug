@@ -8,7 +8,7 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.includes(:favorite_users, :favorite_from_user_to_books)
+    @books = Book.includes(:favorite_users, :favorite_from_user_to_books, :book_rating)
     @book = Book.new
   end
 
@@ -56,6 +56,6 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, book_ratings_attributes: [:rate]).merge(user: current_user)
+    params.require(:book).permit(:title, :body, book_rating_attributes: [:rate]).merge(user: current_user)
   end
 end

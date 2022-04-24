@@ -8,20 +8,28 @@
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
 
-  <div class="star-field">
-    <%= f.fields_for :book_ratings, book.book_ratings.new do |i| %>
-      <%= i.radio_button :rate, 5, id: 'book_book_ratings_attributes_0_star5' %>
-      <%= i.label :star5, '★' %>
-      <%= i.radio_button :rate, 4, id: 'book_book_ratings_attributes_0_star4' %>
-      <%= i.label :star4, '★' %>
-      <%= i.radio_button :rate, 3, id: 'book_book_ratings_attributes_0_star3' %>
-      <%= i.label :star3, '★' %>
-      <%= i.radio_button :rate, 2, id: 'book_book_ratings_attributes_0_star2' %>
-      <%= i.label :star2, '★' %>
-      <%= i.radio_button :rate, 1, id: 'book_book_ratings_attributes_0_star1' %>
-      <%= i.label :star1, '★' %>
-    <% end %>
-  </div>
+  <% if book.book_rating.present? %>
+    <div class="star">
+      <% for i in 1..book.book_rating.rate do %>
+        ★
+      <% end %>
+    </div>
+  <% else %>
+    <div class="star-field">
+      <%= f.fields_for :book_rating, book.build_book_rating do |i| %>
+        <%= i.radio_button :rate, 5, id: 'book_book_rating_attributes_star5' %>
+        <%= i.label :star5, '★' %>
+        <%= i.radio_button :rate, 4, id: 'book_book_rating_attributes_star4' %>
+        <%= i.label :star4, '★' %>
+        <%= i.radio_button :rate, 3, id: 'book_book_rating_attributes_star3' %>
+        <%= i.label :star3, '★' %>
+        <%= i.radio_button :rate, 2, id: 'book_book_rating_attributes_star2' %>
+        <%= i.label :star2, '★' %>
+        <%= i.radio_button :rate, 1, id: 'book_book_rating_attributes_star1' %>
+        <%= i.label :star1, '★' %>
+      <% end %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.submit class: 'btn btn-success' %>
